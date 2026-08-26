@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVOS BANDUNG | Mobile Legends Division</title>
+<meta name="description" content="EVOS Bandung — Divisi Mobile Legends dari West Java. Kenali roster, jadwal, dan tim di balik EVOS Bandung.">
+<meta property="og:title" content="EVOS BANDUNG">
+<meta property="og:description" content="Divisi Mobile Legends EVOS Bandung, Est. 2024, West Java.">
+<meta property="og:image" content="assets/images/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --cyan: #00e5ff;
+    --blue: #2979ff;
+    --dark: #080810;
+    --card: #0f0f1a;
+    --card2: #141425;
+    --border: rgba(255,255,255,0.07);
+    --glow-cyan: 0 0 24px rgba(0,229,255,0.5);
+    --glow-blue: 0 0 24px rgba(41,121,255,0.4);
+
+    /* Unified role palette — single cool-tone family so the roster
+       grid reads as one cohesive brand instead of a rainbow */
+    --role-gold: #29b6f6;
+    --role-jungle: #00e5ff;
+    --role-roam: #2979ff;
+    --role-mid: #7c4dff;
+    --role-exp: #00bfa5;
+    --role-flex: #90a4ae;
+    --role-captain: #ffd54f;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 99px; }
+
+/* ─── TOPBAR ─── */
+.topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 40px 12px;
+    background: rgba(8,8,16,0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    gap: 10px;
+}
+
+.topbar .logo-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.topbar .logo-wrap img {
+    height: 64px;
+    filter: drop-shadow(0 0 14px rgba(0,229,255,0.6));
+}
+
+nav { display: flex; align-items: center; gap: 8px; }
+
+nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+nav a:hover {
+    color: #fff;
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.1);
+    text-shadow: 0 0 12px rgba(0,229,255,0.6);
+}
+
+.nav-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-left: 6px;
+}
+
+.nav-social:hover {
+    color: #fff;
+    border-color: var(--cyan);
+    background: rgba(0,229,255,0.12);
+    box-shadow: var(--glow-cyan);
+}
+
+.nav-social svg { width: 18px; height: 18px; }
+
+/* ─── HERO ─── */
+.hero {
+    position: relative;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, #0a0f2e 0%, #080810 70%);
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,229,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%,100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+.hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(40px);
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); }
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-tag {
+    display: inline-block;
+    background: rgba(0,229,255,0.15);
+    border: 1px solid rgba(0,229,255,0.4);
+    color: var(--cyan);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 30%, #00e5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 30px rgba(0,229,255,0.5));
+}
+
+.hero p {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+}
+
+.hero-line {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    margin: 20px auto 0;
+    border-radius: 99px;
+}
+
+.hero-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 26px;
+    padding: 9px 20px;
+    border: 1px solid rgba(0,229,255,0.35);
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1px;
+    background: rgba(0,229,255,0.08);
+    transition: all 0.25s;
+}
+
+.hero-social:hover {
+    background: var(--cyan);
+    color: #05070d;
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-2px);
+}
+
+.hero-social svg { width: 18px; height: 18px; }
+
+/* ─── MUSIC PLAYER ─── */
+.music-bar {
+    background: linear-gradient(90deg, #0a0d18, #0d0f1c, #0a0d18);
+    border-top: 1px solid rgba(0,229,255,0.2);
+    border-bottom: 1px solid rgba(0,229,255,0.2);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.music-bar .track-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 260px;
+}
+
+.music-bar .disc {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: conic-gradient(var(--cyan), #001a33, var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 4s linear infinite;
+    animation-play-state: paused;
+    flex-shrink: 0;
+}
+
+.music-bar .disc.playing { animation-play-state: running; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.disc-inner {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--dark);
+}
+
+.track-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.track-artist {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.music-controls button {
+    background: rgba(0,229,255,0.15);
+    border: 1px solid rgba(0,229,255,0.3);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.music-controls button:hover,
+.music-controls button.active {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+.music-controls .btn-play {
+    width: 40px;
+    height: 40px;
+    background: var(--cyan);
+    color: #05070d;
+    box-shadow: var(--glow-cyan);
+}
+
+.music-controls .btn-sm {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    background: transparent;
+}
+
+/* ─── PLAYLIST DROPDOWN ─── */
+.playlist-wrap { position: relative; }
+
+.playlist-panel {
+    position: absolute;
+    bottom: 54px;
+    left: 0;
+    width: 280px;
+    max-height: 280px;
+    overflow-y: auto;
+    background: rgba(10,10,20,0.97);
+    border: 1px solid rgba(0,229,255,0.25);
+    border-radius: 12px;
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 50;
+}
+
+.playlist-panel.open { display: flex; }
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.playlist-item:hover { background: rgba(0,229,255,0.08); }
+
+.playlist-item.active {
+    background: rgba(0,229,255,0.14);
+}
+
+.playlist-item .pl-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    width: 16px;
+}
+
+.playlist-item.active .pl-num { color: var(--cyan); }
+
+.playlist-item .pl-info { flex: 1; min-width: 0; }
+
+.playlist-item .pl-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist-item .pl-artist {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar-wrap {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), #6df3ff);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.3s;
+    pointer-events: none;
+}
+
+.time-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-variant-numeric: tabular-nums;
+    min-width: 36px;
+}
+
+.volume-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-icon { font-size: 16px; color: rgba(255,255,255,0.4); }
+
+input[type="range"].vol-slider {
+    -webkit-appearance: none;
+    width: 80px;
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 99px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"].vol-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cyan);
+    cursor: pointer;
+}
+
+/* ─── NO-PHOTO AVATAR PLACEHOLDER ─── */
+.player.no-photo .player-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, var(--card2), var(--card));
+}
+
+.player.no-photo .avatar-initial {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: rgba(255,255,255,0.12);
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+    z-index: 1;
+    transition: color 0.3s, -webkit-text-stroke 0.3s;
+}
+
+.player.no-photo:hover .avatar-initial {
+    color: rgba(0,229,255,0.16);
+    -webkit-text-stroke: 1.5px rgba(0,229,255,0.5);
+}
+
+/* ─── ROSTER COUNT ─── */
+.roster-count {
+    display: block;
+    margin-top: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+}
+
+/* ─── BACK TO TOP ─── */
+.back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(0,229,255,0.12);
+    border: 1px solid rgba(0,229,255,0.4);
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    backdrop-filter: blur(8px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--cyan);
+    color: #05070d;
+    box-shadow: var(--glow-cyan);
+}
+
+/* ─── SECTION HEADER ─── */
+.section-header {
+    text-align: center;
+    padding: 60px 20px 10px;
+}
+
+.section-header .label {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--cyan);
+    margin: 16px auto 0;
+    border-radius: 99px;
+}
+
+/* ─── FILTER ─── */
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 20px;
+}
+
+.filter button {
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 8px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.25s;
+}
+
+.filter button:hover,
+.filter button.active-filter {
+    background: var(--cyan);
+    color: #fff;
+    border-color: var(--cyan);
+    box-shadow: var(--glow-cyan);
+}
+
+/* ─── PLAYERS GRID ─── */
+.roster { padding: 0 40px 80px; }
+
+.players {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.player {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.player:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* Role-based hover glows — unified cool-tone family */
+.player.gold:hover    { box-shadow: 0 20px 50px rgba(41,182,246,0.35); border-color: rgba(41,182,246,0.4); }
+.player.jungle:hover  { box-shadow: 0 20px 50px rgba(0,229,255,0.35);  border-color: rgba(0,229,255,0.4); }
+.player.roam:hover    { box-shadow: 0 20px 50px rgba(41,121,255,0.35); border-color: rgba(41,121,255,0.4); }
+.player.mid:hover     { box-shadow: 0 20px 50px rgba(124,77,255,0.35); border-color: rgba(124,77,255,0.4); }
+.player.exp:hover     { box-shadow: 0 20px 50px rgba(0,191,165,0.35);  border-color: rgba(0,191,165,0.4); }
+.player.captain:hover { box-shadow: 0 20px 50px rgba(255,213,79,0.4);  border-color: rgba(255,213,79,0.5); }
+.player.flex:hover    { box-shadow: 0 20px 50px rgba(144,164,174,0.3); border-color: rgba(144,164,174,0.35); }
+
+.player-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+}
+
+.player img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s, filter 0.3s;
+    filter: brightness(0.75) saturate(0.9);
+}
+
+.player:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.95) saturate(1.1);
+}
+
+/* Role-colored top bar */
+.player-img-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 3;
+}
+.player.gold    .player-img-wrap::before { background: var(--role-gold); }
+.player.jungle  .player-img-wrap::before { background: var(--role-jungle); }
+.player.roam    .player-img-wrap::before { background: var(--role-roam); }
+.player.mid     .player-img-wrap::before { background: var(--role-mid); }
+.player.exp     .player-img-wrap::before { background: var(--role-exp); }
+.player.captain .player-img-wrap::before { background: var(--role-captain); }
+.player.flex    .player-img-wrap::before { background: var(--role-flex); }
+
+/* Gradient overlay */
+.player-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.player-info {
+    padding: 14px 16px 18px;
+    position: relative;
+}
+
+.player h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.role-badge {
+    display: inline-block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    opacity: 0.85;
+}
+
+/* Role colors — single cool-tone brand family */
+.captain-c { color: var(--role-captain); }
+.gold-c    { color: var(--role-gold); }
+.jungle-c  { color: var(--role-jungle); }
+.roam-c    { color: var(--role-roam); }
+.mid-c     { color: var(--role-mid); }
+.exp-c     { color: var(--role-exp); }
+.flex-c    { color: var(--role-flex); }
+
+/* Captain crown badge */
+.crown {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #2979ff, #00b8d4);
+    color: #000;
+    font-size: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    z-index: 4;
+    box-shadow: 0 2px 8px rgba(41,121,255,0.4);
+}
+
+/* ─── FOOTER ─── */
+footer {
+    background: #050508;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Rajdhani', sans-serif;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+footer span { color: var(--cyan); }
+
+.footer-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 9px 18px;
+    border: 1px solid rgba(0,229,255,0.3);
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+}
+
+.footer-social:hover {
+    background: var(--cyan);
+    color: #05070d;
+    box-shadow: var(--glow-cyan);
+}
+
+.footer-social svg { width: 16px; height: 16px; }
+
+.footer-copy { text-transform: uppercase; color: rgba(255,255,255,0.25); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+    .topbar { padding: 12px 20px; }
+    .hero h1 { font-size: 38px; }
+    .music-bar { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+    .music-bar .track-info { min-width: 0; }
+    .music-progress { order: 4; width: 100%; }
+    .playlist-panel { left: auto; right: 0; width: 240px; }
+    .roster { padding: 0 16px 60px; }
+    .players { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+    .player-img-wrap { height: 200px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="logo-wrap">
+        <img src="assets/images/logo.png" alt="EVOS Bandung">
+    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#roster">Roster</a>
+        <a href="https://instagram.com/evosbandungalamin" target="_blank" rel="noopener" class="nav-social" title="Instagram @evosbandungalamin" aria-label="Instagram EVOS Bandung">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+    </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+        <div class="hero-tag">Mobile Legends Division</div>
+        <h1>EVOS BANDUNG</h1>
+        <p>Est. 2024 &nbsp;•&nbsp; West Java</p>
+        <div class="hero-line"></div>
+        <a href="https://instagram.com/evosbandungalamin" target="_blank" rel="noopener" class="hero-social">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            @evosbandungalamin
+        </a>
+    </div>
+</section>
+
+<!-- MUSIC PLAYER -->
+<div class="music-bar" id="musicBar">
+    <div class="track-info">
+        <div class="disc" id="disc">
+            <div class="disc-inner"></div>
+        </div>
+        <div>
+            <div class="track-name" id="trackName">Married With Children</div>
+            <div class="track-artist" id="trackArtist">Oasis</div>
+        </div>
+    </div>
+
+    <div class="music-controls">
+        <button class="btn-sm" id="prevBtn" onclick="prevTrack()" title="Sebelumnya">&#9664;&#9664;</button>
+        <button class="btn-play" id="playBtn" onclick="togglePlay()" title="Play/Pause">&#9654;</button>
+        <button class="btn-sm" id="nextBtn" onclick="nextTrack()" title="Berikutnya">&#9654;&#9654;</button>
+    </div>
+
+    <div class="music-progress">
+        <span class="time-label" id="curTime">0:00</span>
+        <div class="progress-bar-wrap" id="progressBar" onclick="seekAudio(event)">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="time-label" id="durTime">0:00</span>
+    </div>
+
+    <div class="playlist-wrap">
+        <button class="btn-sm" id="playlistBtn" onclick="togglePlaylist()" title="Playlist">&#9776;</button>
+        <div class="playlist-panel" id="playlistPanel"></div>
+    </div>
+
+    <div class="volume-wrap">
+        <span class="volume-icon">&#128266;</span>
+        <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.7" oninput="setVolume(this.value)">
+    </div>
+</div>
+
+<audio id="audioPlayer" src="assets/audio/track.mp3" preload="metadata"></audio>
+
+<!-- SECTION HEADER -->
+<div class="section-header" id="roster">
+    <span class="label">Meet The Team</span>
+    <h2>MAIN ROSTER</h2>
+    <div class="section-divider"></div>
+    <span class="roster-count" id="rosterCount"></span>
+</div>
+
+<!-- FILTER -->
+<div class="filter">
+    <button class="active-filter" onclick="filterRole('all', this)">All</button>
+    <button onclick="filterRole('mid', this)">Mid</button>
+    <button onclick="filterRole('jungle', this)">Jungle</button>
+    <button onclick="filterRole('gold', this)">Gold</button>
+    <button onclick="filterRole('exp', this)">EXP</button>
+    <button onclick="filterRole('roam', this)">Roam</button>
+    <button onclick="filterRole('flex', this)">Flex</button>
+</div>
+
+<!-- ROSTER -->
+<section class="roster">
+<div class="players">
+
+    <div class="player gold" data-role="gold">
+        <div class="player-img-wrap">
+            <img src="assets/images/yusuf.jpg" alt="Yusuf" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Yusuf</h3>
+            <span class="role-badge gold-c">Gold Laner</span>
+        </div>
+    </div>
+
+    <div class="player jungle" data-role="jungle">
+        <div class="player-img-wrap">
+            <img src="assets/images/haidar.jpg" alt="Haidar" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Haidar</h3>
+            <span class="role-badge jungle-c">Jungler</span>
+        </div>
+    </div>
+
+    <div class="player roam" data-role="roam">
+        <div class="player-img-wrap">
+            <img src="assets/images/faris.jpg" alt="Faris" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Faris</h3>
+            <span class="role-badge roam-c">Roamer</span>
+        </div>
+    </div>
+
+    <div class="player exp" data-role="exp">
+        <div class="player-img-wrap">
+            <img src="assets/images/mikail.jpg" alt="Mikail" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Mikail</h3>
+            <span class="role-badge exp-c">EXP Laner</span>
+        </div>
+    </div>
+
+    <div class="player exp" data-role="exp">
+        <div class="player-img-wrap">
+            <img src="assets/images/ridwan.jpg" alt="Ridwan" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Ridwan</h3>
+            <span class="role-badge exp-c">EXP Laner</span>
+        </div>
+    </div>
+
+    <div class="player mid" data-role="mid">
+        <div class="player-img-wrap">
+            <img src="assets/images/fairus.jpg" alt="Fairus" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Fairus</h3>
+            <span class="role-badge mid-c">Mid Laner</span>
+        </div>
+    </div>
+
+    <div class="player mid" data-role="mid">
+        <div class="player-img-wrap">
+            <img src="assets/images/affaw.jpg" alt="Affaw" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Affaw</h3>
+            <span class="role-badge mid-c">Mid Laner</span>
+        </div>
+    </div>
+
+    <div class="player jungle" data-role="jungle">
+        <div class="player-img-wrap">
+            <img src="assets/images/alif.jpg" alt="Alif" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Alif</h3>
+            <span class="role-badge jungle-c">Jungler (Poke)</span>
+        </div>
+    </div>
+
+    <div class="player flex" data-role="flex">
+        <div class="player-img-wrap">
+            <img src="assets/images/robin.jpg" alt="Robin" loading="lazy">
+        </div>
+        <div class="player-info">
+            <h3>Robin</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">E</span>
+        </div>
+        <div class="player-info">
+            <h3>Emil</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">F</span>
+        </div>
+        <div class="player-info">
+            <h3>Fatir</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">K</span>
+        </div>
+        <div class="player-info">
+            <h3>Kenzi</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">D</span>
+        </div>
+        <div class="player-info">
+            <h3>Dzaky</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">G</span>
+        </div>
+        <div class="player-info">
+            <h3>Geo</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+    <div class="player flex no-photo" data-role="flex">
+        <div class="player-img-wrap">
+            <span class="avatar-initial">F</span>
+        </div>
+        <div class="player-info">
+            <h3>Fahrain</h3>
+            <span class="role-badge flex-c">Flex Player</span>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas" aria-label="Kembali ke atas">&#8593;</button>
+
+<!-- FOOTER -->
+<footer>
+    <a href="https://instagram.com/evosbandungalamin" target="_blank" rel="noopener" class="footer-social">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        @evosbandungalamin
+    </a>
+    <div class="footer-copy">&copy; 2024 <span>EVOS BANDUNG</span> &nbsp;|&nbsp; Mobile Legends Division</div>
+</footer>
+
+<script>
+/* ─── FILTER ─── */
+function filterRole(role, btn) {
+    document.querySelectorAll('.filter button').forEach(b => b.classList.remove('active-filter'));
+    if (btn) btn.classList.add('active-filter');
+
+    document.querySelectorAll('.player').forEach(p => {
+        if (role === 'all' || p.dataset.role === role) {
+            p.style.display = '';
+        } else {
+            p.style.display = 'none';
+        }
+    });
+}
+
+/* ─── MUSIC PLAYER / PLAYLIST ─── */
+const playlist = [
+    { name: 'Married With Children', artist: 'Oasis', src: 'assets/audio/track.mp3' },
+    { name: 'Roar Anthem', artist: 'Lucky Adnan', src: 'assets/audio/roar-anthem.mp3' },
+    { name: 'Basket Case', artist: 'Green Day', src: 'assets/audio/basket-case.mp3' },
+    { name: 'Stand By Me', artist: 'Oasis', src: 'assets/audio/stand-by-me.mp3' },
+    { name: 'Wish You Were Here', artist: 'Pink Floyd', src: 'assets/audio/wish-you-were-here.mp4' },
+];
+
+let currentTrack = 0;
+
+const audio = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const disc = document.getElementById('disc');
+const progressFill = document.getElementById('progressFill');
+const curTime = document.getElementById('curTime');
+const durTime = document.getElementById('durTime');
+const trackNameEl = document.getElementById('trackName');
+const trackArtistEl = document.getElementById('trackArtist');
+const playlistPanel = document.getElementById('playlistPanel');
+
+audio.volume = 0.7;
+
+function fmt(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function renderPlaylist() {
+    playlistPanel.innerHTML = playlist.map((t, i) => `
+        <div class="playlist-item${i === currentTrack ? ' active' : ''}" onclick="loadTrack(${i}, true)">
+            <span class="pl-num">${i + 1}</span>
+            <div class="pl-info">
+                <div class="pl-name">${t.name}</div>
+                <div class="pl-artist">${t.artist}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function loadTrack(index, autoplay) {
+    currentTrack = (index + playlist.length) % playlist.length;
+    const t = playlist[currentTrack];
+    audio.src = t.src;
+    trackNameEl.textContent = t.name;
+    trackArtistEl.textContent = t.artist;
+    progressFill.style.width = '0%';
+    curTime.textContent = '0:00';
+    renderPlaylist();
+    if (autoplay) {
+        audio.play();
+        playBtn.innerHTML = '&#9646;&#9646;';
+        disc.classList.add('playing');
+    }
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerHTML = '&#9646;&#9646;';
+        disc.classList.add('playing');
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '&#9654;';
+        disc.classList.remove('playing');
+    }
+}
+
+function nextTrack() { loadTrack(currentTrack + 1, true); }
+function prevTrack() { loadTrack(currentTrack - 1, true); }
+
+function togglePlaylist() {
+    playlistPanel.classList.toggle('open');
+}
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.playlist-wrap')) {
+        playlistPanel.classList.remove('open');
+    }
+});
+
+audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = pct + '%';
+    curTime.textContent = fmt(audio.currentTime);
+});
+
+audio.addEventListener('loadedmetadata', () => {
+    durTime.textContent = fmt(audio.duration);
+});
+
+audio.addEventListener('ended', () => {
+    nextTrack();
+});
+
+function seekAudio(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+}
+
+function setVolume(v) {
+    audio.volume = v;
+}
+
+renderPlaylist();
+
+/* ─── ROSTER COUNT ─── */
+document.getElementById('rosterCount').textContent =
+    document.querySelectorAll('.player').length + ' Players Active';
+
+/* ─── BACK TO TOP ─── */
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) backToTop.classList.add('show');
+    else backToTop.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
